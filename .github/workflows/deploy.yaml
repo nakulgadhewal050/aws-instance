@@ -22,7 +22,7 @@ jobs:
           username: ubuntu
           key: ${{ secrets.SSH_KEY }}
           script: |
-            cd /aws-instance
+            cd /home/ubuntu/aws-instance
             sudo docker compose down
             sudo docker compose up -d --build
             

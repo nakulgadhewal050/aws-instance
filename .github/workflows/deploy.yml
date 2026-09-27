@@ -23,6 +23,7 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           script: |
             cd /home/ubuntu/aws-instance
+            git pull
             sudo docker build -t aws-instance:latest -f dockerfile .
             sudo docker stop aws-instance || true
             sudo docker rm aws-instance || true

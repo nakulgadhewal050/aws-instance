@@ -4,10 +4,7 @@ on:
   push:
     branches:
       - main
-  workflow_dispatch:
-
-permissions:
-  contents: read
+ 
 
 jobs:
   deploy:
@@ -17,26 +14,6 @@ jobs:
       - name: Check out code
         uses: actions/checkout@v4
 
-      - name: Create application directory
-        uses: appleboy/ssh-action@v1.2.2
-        with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ubuntu
-          key: ${{ secrets.SSH_KEY }}
-          script: |
-            mkdir -p /home/ubuntu/aws-instance
-            sudo chown -R ubuntu:ubuntu /home/ubuntu/aws-instance
-            sudo chmod u+rwx /home/ubuntu/aws-instance
-
-      - name: Copy application to EC2
-        uses: appleboy/scp-action@v0.1.7
-        with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ubuntu
-          key: ${{ secrets.SSH_KEY }}
-          source: "dockerfile,index.js,package.json,package-lock.json"
-          target: "/home/ubuntu/aws-instance"
-          overwrite: true
 
       - name: Build and run application
         uses: appleboy/ssh-action@v1.2.2

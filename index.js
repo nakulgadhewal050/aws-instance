@@ -7,6 +7,12 @@ app.get("/",(req,res)=>{
     })
 })
 
+app.get("/health",(req,res)=>{
+    return res.json({
+        status: "Healthy"
+    })
+})
+
 
 app.listen(3000,()=>{
     console.log("Server is running on port 3000")

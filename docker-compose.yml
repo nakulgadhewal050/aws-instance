@@ -1,0 +1,7 @@
+services:
+  
+  aws-instance:
+    build: ./
+    ports:
+      - 8000:3000
+      

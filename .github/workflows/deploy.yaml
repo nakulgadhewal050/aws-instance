@@ -5,15 +5,17 @@ on:
     branches:
       - main
 
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Check out codes
+      - name: Check out code
         uses: actions/checkout@v4
 
-      - name: Deploy via SSH
+
+      - name: Set up SSH
         uses: appleboy/ssh-action@v1.2.2
         with:
           host: ${{ secrets.SSH_HOST }}
@@ -21,8 +23,7 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           script: |
             cd /aws-instance
-            git pull
             sudo docker compose down
             sudo docker compose up -d --build
-          
             
+

@@ -22,9 +22,21 @@ jobs:
           username: ubuntu
           key: ${{ secrets.SSH_KEY }}
           script: |
-            cd /home/ubuntu/aws-instance
+            APP_DIR=""
+            if [ -d "/aws-instance" ]; then
+              APP_DIR="/aws-instance"
+            elif [ -d "$HOME/aws-instance" ]; then
+              APP_DIR="$HOME/aws-instance"
+            elif [ -d "/home/ubuntu/aws-instance" ]; then
+              APP_DIR="/home/ubuntu/aws-instance"
+            else
+              echo "aws-instance directory not found on host"
+              exit 1
+            fi
+
+            git config --global --add safe.directory "$APP_DIR"
+            cd "$APP_DIR"
             git pull
             sudo docker compose down
             sudo docker compose up -d --build
             
-

@@ -25,6 +25,8 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           script: |
             mkdir -p /home/ubuntu/aws-instance
+            sudo chown -R ubuntu:ubuntu /home/ubuntu/aws-instance
+            sudo chmod u+rwx /home/ubuntu/aws-instance
 
       - name: Copy application to EC2
         uses: appleboy/scp-action@v0.1.7

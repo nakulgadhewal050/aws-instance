@@ -9,7 +9,7 @@ app.get("/",(req,res)=>{
 
 app.get("/health",(req,res)=>{
     return res.json({
-        status: "Healthy"
+        status: "all is good"
     })
 })
 

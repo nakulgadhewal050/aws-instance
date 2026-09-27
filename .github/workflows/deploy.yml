@@ -24,8 +24,7 @@ jobs:
           script: |
             cd /home/ubuntu/aws-instance
             git pull
-            sudo docker build -t aws-instance:latest -f dockerfile .
-            sudo docker stop aws-instance || true
-            sudo docker rm aws-instance || true
-            sudo docker run -d --name aws-instance --restart unless-stopped -p 3000:3000 aws-instance:latest
+            sudo docker compose down
+            sudo docker compose up -d --build
+         
 
